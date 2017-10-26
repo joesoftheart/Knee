@@ -5,68 +5,86 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>signup</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding id="signup" >
-<ion-grid  >
-  <ion-row>
-    <ion-col text text-center>
-        Signup Page
-    </ion-col>
-
-  </ion-row>
-</ion-grid>
-<ion-grid>
-  <ion-row>
-    <ion-col>
-     <ion-item>
-       <ion-label fixed>Email</ion-label>
-       <ion-input type="text" value=""></ion-input>
-     </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-   <ion-col>
-    <ion-item>
-      <ion-label fixed>Password</ion-label>
-      <ion-input type="password" value=""></ion-input>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label fixed>ConFirmPassword</ion-label>
-        <ion-input type="password" value=""></ion-input>
-       </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-        <ion-item>
-          <ion-label>Brand</ion-label>
-          <ion-select [(ngModel)]="brand">
-            <ion-option value="Brand 1">Brand 1</ion-option>
-            <ion-option value="Brand 1">Brand 1</ion-option>
-            <ion-option value="Brand 1">Brand 1</ion-option>
-            <ion-option value="Brand 1">Brand 1</ion-option>
-            <ion-option value="Brand 1">Brand 1</ion-option>
-          </ion-select>
-        </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <button ion-button full>Sign up</button>
-    </ion-col>
-  </ion-row>
-</ion-grid>
-
-</ion-content>
+  
+    <ion-navbar>
+      <ion-title>signup</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding id="signup" >
+  <ion-grid  >
+    <ion-row>
+      <ion-col text text-center>
+          Signup Page
+      </ion-col>
+  
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+  
+   <form [formGroup]= "formregister" (ngSubmit)="onRegister(formregister.value)">
+  
+      <ion-row>
+          <ion-col>
+           <ion-item>
+             <ion-label stacked>Email</ion-label>
+             <ion-input type="email"  placeholder="email" formControlName="email"></ion-input>
+           </ion-item>
+           <ion-item *ngIf="formregister.controls.email.hasError('pattern') && formregister.controls.email.touched">
+              <p><font color="red"> * Email is invalid format</font></p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+         <ion-col>
+          <ion-item>
+            <ion-label stacked>Password</ion-label>
+            <ion-input type="password" placeholder="password" formControlName="password"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="formregister.controls.password.hasError('required') && formregister.controls.password.touched">
+                <p><font color="red"> * Password is required</font></p>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+      
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>ConFirmPassword</ion-label>
+              <ion-input type="password" placeholder="confirmPassword" formControlName="password_confirm" ></ion-input>
+             </ion-item>
+             <ion-item *ngIf="formregister.controls.password_confirm.hasError('equalTo') && formregister.controls.password_confirm.touched">
+                <p><font color="red">  * Password mismatch</font></p>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                <ion-label stacked>Brand</ion-label>
+                <ion-select [(ngModel)]="Brand" formControlName="brand">
+                  <ion-option value="Brand1">Brand 1</ion-option>
+                  <ion-option value="Brand2">Brand 2</ion-option>
+                  <ion-option value="Brand3">Brand 3</ion-option>
+                  <ion-option value="Brand4">Brand 4</ion-option>
+                  <ion-option value="Brand5">Brand 5</ion-option>
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="formregister.controls.brand.hasError('required') && formregister.controls.brand.touched">
+                  <p><font color="red"> * Brand is required</font></p>
+                </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <button ion-button full type="submit" [disabled]="!formregister.valid">Sign up</button>
+          </ion-col>
+        </ion-row>
+   </form>
+  
+  </ion-grid>
+  
+  </ion-content>
+  

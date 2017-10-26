@@ -29,7 +29,7 @@ NewCasePageModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__new_case__["a" /* NewCasePage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__new_case__["a" /* NewCasePage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__new_case__["a" /* NewCasePage */]),
         ],
     })
 ], NewCasePageModule);
