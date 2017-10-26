@@ -1,14 +1,61 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+  <ion-header >
+      <ion-navbar hideBackButton>
+          <ion-icon  name="logo-android"></ion-icon>
+            <ion-buttons end>
+              <button ion-button icon-only (click)="openModal()">
+                  <ion-icon name="exit"></ion-icon>
+              </button>
+            </ion-buttons>
+  
+
+
+        </ion-navbar>
+
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-row>
+      <ion-col col-8>
+          <ion-item>
+              <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon></ion-label>
+              <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="myDate"></ion-datetime>
+            </ion-item>
+    </ion-col>
+    <ion-col col-4>
+        <button ion-button outline icon-right>hn</button>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-8>
+        <button ion-button outline icon-right block>Hospital <ion-icon name="medkit"></ion-icon></button>
+      </ion-col>
+      <ion-col col-4>
+          <button ion-button outline icon-right><ion-icon name="add" md="md-add"></ion-icon></button>
+      </ion-col>
+      </ion-row>
+     
+      
+      <ion-row>
+        <ion-col><button ion-button outline full>No</button></ion-col>
+        <ion-col><button ion-button outline full>HN</button></ion-col>
+        <ion-col><button ion-button outline full>Opt</button></ion-col>
+        <ion-col><button ion-button outline full>Date</button></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>d</ion-col>
+          <ion-col>d</ion-col>
+          <ion-col>d</ion-col>
+          <ion-col>d</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>d</ion-col>
+            <ion-col>d</ion-col>
+            <ion-col>d</ion-col>
+            <ion-col>d</ion-col>
+          </ion-row>
+
+      <button ion-button (click)="logout()">Logout  </button>
+      <button ion-button (click)="newcase()">Newcase  </button>
+  </ion-content>
+
