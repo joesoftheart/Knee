@@ -14,6 +14,9 @@ import { TabspagePage } from '../pages/tabspage/tabspage';
 import { NewCasePage} from '../pages/new-case/new-case';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { HttpModule } from '@angular/http';
+import { SQLite } from '@ionic-native/sqlite';
+import { Toast } from '@ionic-native/toast';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +50,9 @@ import { HttpModule } from '@angular/http';
     SplashScreen,
     BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataServiceProvider
+    DataServiceProvider,
+    SQLite,
+    Toast
   ]
 })
 export class AppModule {}

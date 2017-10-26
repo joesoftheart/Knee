@@ -45,6 +45,14 @@ module.exports = [
     "clobbers": [
       "cordova.plugins.barcodeScanner"
     ]
+  },
+  {
+    "id": "cordova-sqlite-storage.SQLitePlugin",
+    "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+    "pluginId": "cordova-sqlite-storage",
+    "clobbers": [
+      "SQLitePlugin"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -56,7 +64,8 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.1",
   "cordova-plugin-x-toast": "2.6.0",
   "ionic-plugin-keyboard": "2.2.1",
-  "phonegap-plugin-barcodescanner": "7.0.0"
+  "phonegap-plugin-barcodescanner": "7.0.0",
+  "cordova-sqlite-storage": "2.0.4"
 };
 // BOTTOM OF METADATA
 });

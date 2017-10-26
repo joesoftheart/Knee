@@ -10,7 +10,7 @@
   "cordova-plugin-x-toast": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-x-toast"
+      "id": "cordova-plugin-x-toast@^2.6.0"
     },
     "is_top_level": true,
     "variables": {}
@@ -59,6 +59,14 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-ionic-webview@^1.1.11"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-sqlite-storage": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-sqlite-storage"
     },
     "is_top_level": true,
     "variables": {}
