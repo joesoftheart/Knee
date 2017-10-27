@@ -1,0 +1,33 @@
+<!--
+  Generated template for the ServicePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>service</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-row>
+      
+          <ion-card *ngIf="productFound">
+              <ion-card-header>
+                <h2>Price: $ {{selectedProduct.elevation}}</h2>
+              </ion-card-header>
+              <ion-card-content>
+                <ul>
+                  <li>{{selectedProduct.elevation}}</li>
+                  <li>{{selectedProduct.elevation}}</li>
+                  <li>{{selectedProduct.elevation}}</li>
+                </ul>
+              </ion-card-content>
+            </ion-card>
+      </ion-row>
+ 
+</ion-content>

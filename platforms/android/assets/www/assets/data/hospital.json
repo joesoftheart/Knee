@@ -1,0 +1,20 @@
+[
+    {"created_at":"2015-08-08T00:01:54.646+07:00",
+        "hospital_code":"PGH",
+        "hospital_name_en":"Police General Hospital",
+        "hospital_name_thai":"โรงพยาบาลตำรวจ",
+        "id":"55c4e3ed790f9b223e000002",
+        "provider_level":"4",
+        "region":"1",
+        "updated_at":"2017-06-22T10:13:08.158+07:00"
+    },
+    {"created_at":"2015-08-08T00:01:54.646+07:00",
+        "hospital_code":"PGH",
+        "hospital_name_en":"Police General Hospital",
+        "hospital_name_thai":"โรงพยาบาลตำรวจ",
+        "id":"55c4e3ed790f9b223e000002",
+        "provider_level":"4",
+        "region":"1",
+        "updated_at":"2017-06-22T10:13:08.158+07:00"
+    }
+]

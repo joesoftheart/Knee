@@ -21,7 +21,7 @@ export class DataServiceProvider {
   }
   load() {
 
-   return this.http.get('http://thkjr.emr-life.com/taig/Api/get_database').map(res => res.json());
+   return this.http.get('https://www.freeformatter.com/json-formatter.html').map(res => res.json());
 
   }
   
