@@ -21,9 +21,9 @@ export class DataServiceProvider {
   }
   load() {
 
-   return this.http.get('https://www.freeformatter.com/json-formatter.html').map(res => res.json());
+   return this.http.get('assets/data/hospital.json').map(res => res.json().hospital);
 
   }
-  
 
+  
 }

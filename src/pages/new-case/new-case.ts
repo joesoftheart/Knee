@@ -30,6 +30,8 @@ export class NewCasePage {
     .subscribe((response)=> {
         this.products = response
         console.log(this.products);
+        var myJSONText = JSON.stringify(response);
+        console.log(myJSONText);
     });
   }
   
@@ -40,9 +42,9 @@ export class NewCasePage {
 
   scan() {
     var scanOption = {
-      "preferFrontCamera" : true, // ใช้กล้องหน้าเป็นหลัก false คือกล้องหลัง
-      "showFlipCameraButton" : true, // แสดงปุ่ม icon สลับกล้องหน้า กล้องหลัง
-      "showTorchButton" : true, // แสดงปุ่ม icon ไฟแฟลส
+      "preferFrontCamera" : false, // ใช้กล้องหน้าเป็นหลัก false คือกล้องหลัง
+      "showFlipCameraButton" : false, // แสดงปุ่ม icon สลับกล้องหน้า กล้องหลัง
+      "showTorchButton" : false, // แสดงปุ่ม icon ไฟแฟลส
       "prompt" : "ให้ตำแหน่งของ barcode อยู่ภายในพื้นที่ scan", // ข้อความกำหนดเอง
   };
     this.selectedProduct = {};

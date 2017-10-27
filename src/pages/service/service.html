@@ -14,17 +14,11 @@
 
 
 <ion-content padding>
-    <ion-row>
-      
-          <ion-card *ngIf="productFound">
-              <ion-card-header>
-                <h2>Price: $ {{selectedProduct.elevation}}</h2>
-              </ion-card-header>
+    <ion-row *ngFor="let item of selectedProduct; let i = index" >
+          <ion-card *ngIf="productFound" >
               <ion-card-content>
                 <ul>
-                  <li>{{selectedProduct.elevation}}</li>
-                  <li>{{selectedProduct.elevation}}</li>
-                  <li>{{selectedProduct.elevation}}</li>
+                  <li>{{item.hospital_name_thai}}</li>
                 </ul>
               </ion-card-content>
             </ion-card>

@@ -33,7 +33,17 @@
     },
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+      "PACKAGE_NAME": "io.ionic.starter"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-actionsheet": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    }
+  }
 }

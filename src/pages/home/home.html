@@ -1,7 +1,8 @@
 
   <ion-header >
     <ion-navbar hideBackButton>
-        <ion-icon  name="logo-android"> {{email}}</ion-icon>
+        
+        <img src="assets/imgs/icon-40.png" class="logo"/> {{email}}
           <ion-buttons end>
             <button ion-button icon-only (click)="logout()">
                 <ion-icon name="exit"></ion-icon>
@@ -23,7 +24,7 @@
           </ion-item>
   </ion-col>
   <ion-col col-4>
-      <button ion-button outline icon-right>hn</button>
+      <button ion-button outline icon-right block>hn</button>
   </ion-col>
   </ion-row>
   <ion-row>
@@ -31,31 +32,39 @@
       <button ion-button outline icon-right block>Hospital <ion-icon name="medkit"></ion-icon></button>
     </ion-col>
     <ion-col col-4>
-        <button ion-button outline icon-right><ion-icon name="add" md="md-add"></ion-icon></button>
+        <button ion-button outline icon-right block><ion-icon name="add" md="md-add"></ion-icon></button>
     </ion-col>
     </ion-row>
    
-    
-    <ion-row>
-      <ion-col><button ion-button outline full>No</button></ion-col>
-      <ion-col><button ion-button outline full>HN</button></ion-col>
-      <ion-col><button ion-button outline full>Opt</button></ion-col>
-      <ion-col><button ion-button outline full>Date</button></ion-col>
+   
+    <ion-row text-center style="margin-left: 4%;margin-right: 4%;">
+      <ion-col style="background-color:#00BFA5">No</ion-col>
+      <ion-col style="background-color: #00BFA5">HN</ion-col>
+      <ion-col style="background-color: #00BFA5">Opt</ion-col>
+      <ion-col style="background-color: #00BFA5">Date</ion-col>
     </ion-row>
-    <ion-row>
-        <ion-col>d</ion-col>
-        <ion-col>d</ion-col>
-        <ion-col>d</ion-col>
-        <ion-col>d</ion-col>
+    <ion-scroll scrollY="true" class="ion-scroll">
+    <ion-row  *ngFor="let item of myDataArray;">
+   
+        <hr>
+        <ion-col class="colshow" style="background-color: #E0F2F1">sdcds</ion-col>
+        <ion-col class="colshow" style="background-color: #E0F2F1">sdcsd</ion-col>
+        <ion-col class="colshow" style="background-color: #E0F2F1">scsds</ion-col>
+        <ion-col class="colshow" style="background-color: #E0F2F1">sdcsd</ion-col>
       </ion-row>
-      <ion-row>
-          <ion-col>d</ion-col>
-          <ion-col>d</ion-col>
-          <ion-col>d</ion-col>
-          <ion-col>d</ion-col>
-        </ion-row>
+    </ion-scroll>
+    
+    
+ 
 
 
-    <button ion-button (click)="newcase()">Newcase  </button>
+     <ion-row certer text-center>
+         <ion-col align-items: flex-start>
+                <button ion-button (click)="newcase()">Newcase  </button>   
+         </ion-col>
+     </ion-row>
+
+
+   
 </ion-content>
 
