@@ -19,6 +19,11 @@ export class DataServiceProvider {
    return this.http.get('assets/data/products.json').map(res => res.json());
   
   }
+  load() {
+
+   return this.http.get('http://thkjr.emr-life.com/taig/Api/get_database').map(res => res.json());
+
+  }
   
 
 }

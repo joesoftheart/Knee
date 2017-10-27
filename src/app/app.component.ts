@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { HomePage } from '../pages/home/home';
 import { NewCasePage } from '../pages/new-case/new-case';
+import { ServicePage } from '../pages/service/service';
 @Component({
   templateUrl: 'app.html'
 })

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
+import { ServicePage } from '../service/service';
 
 /**
  * Generated class for the NewCasePage page.
@@ -69,6 +70,10 @@ export class NewCasePage {
     }, (err) => {
         console.log("Error occured : " + err);
     });                 
+  }
+
+  service(){
+    this.navCtrl.push(ServicePage)
   }
 
 }

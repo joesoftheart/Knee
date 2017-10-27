@@ -12,6 +12,7 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { TabspagePage } from '../pages/tabspage/tabspage';
 import { NewCasePage} from '../pages/new-case/new-case';
+import { ServicePage } from '../pages/service/service';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { HttpModule } from '@angular/http';
 import { SQLite } from '@ionic-native/sqlite';
@@ -27,6 +28,7 @@ import { Toast } from '@ionic-native/toast';
     SignupPage,
     TabspagePage,
     NewCasePage,
+    ServicePage,
 
     
   ],
@@ -43,7 +45,8 @@ import { Toast } from '@ionic-native/toast';
     LoginPage,
     SignupPage,
     TabspagePage,
-    NewCasePage
+    NewCasePage,
+    ServicePage
   ],
   providers: [
     StatusBar,

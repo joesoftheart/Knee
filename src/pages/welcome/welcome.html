@@ -1,9 +1,14 @@
 <ion-content padding id="welcome">
-  <img src="assets/imgs/logo.png" class="logo"/>
+  <ion-row center text-center>
+    <ion-col >
+        <img src="assets/imgs/THKJR.png" class="logo"/>
+    </ion-col>
+  </ion-row>
+ 
   <ion-grid>
     <ion-row>
       <ion-col>
-        <h1>Welcome to Your App</h1>
+        <font size="6">Welcome to Thai HipKnee </font>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -23,7 +28,8 @@
                   <ion-input type="password"  placeholder="admin"  formControlName="password"></ion-input>
                 </ion-item>
               <ion-col center text-center>
-                <button ion-button full color="lightText" [disabled]= "!loginform.valid"  type="submit" >Log in</button>
+                <!-- <button ion-button full color="lightText" [disabled]= "!loginform.valid"  type="submit" >Log in</button> -->
+                <button ion-button full (click)="go()">Log in</button>
               </ion-col>
         </ion-row>
       </form>
@@ -33,19 +39,11 @@
           </ion-col>
         </ion-row>
   </ion-grid>
- 
 
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <ion-row><ion-icon name="cog"></ion-icon></ion-row>
+
 </ion-content>
- <ion-footer>
-      
-</ion-footer>
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-icon name="cog"></ion-icon>
+  </ion-toolbar>
+</ion-footer> -->

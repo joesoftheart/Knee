@@ -5,6 +5,7 @@ import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
 import { TabspagePage  } from '../tabspage/tabspage';
 import { HomePage  } from '../home/home';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 /**
  * Generated class for the WelcomePage page.
@@ -25,7 +26,9 @@ export class WelcomePage {
   password : AbstractControl;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ,public formbuilder:FormBuilder,public alertCtrl:AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams ,public formbuilder:FormBuilder,public alertCtrl:AlertController,private splashScreen: SplashScreen) {
+
+    this.splashScreen.show()
     let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
       
     this.loginform = formbuilder.group({
@@ -53,6 +56,10 @@ export class WelcomePage {
  
   signup(){
     this.navCtrl.push(SignupPage);
+    }
+
+    go(){
+      this.navCtrl.push(HomePage);
     }
 
 
