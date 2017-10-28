@@ -406,11 +406,11 @@ var map = {
 		2
 	],
 	"../pages/tabspage/tabspage.module": [
-		279,
+		278,
 		1
 	],
 	"../pages/welcome/welcome.module": [
-		278,
+		279,
 		0
 	]
 };
@@ -505,10 +505,9 @@ HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"C:\Users\tonkh\Desktop\Knee\src\pages\home\home.html"*/'\n\n  <ion-header >\n\n    <ion-navbar hideBackButton>\n\n       \n\n            <img  src="assets/imgs/icon-40.png" class="logo"/>\n\n            <ion-title class="titleicon" style="display:inline-block" >Home page</ion-title>\n\n          <ion-buttons end>\n\n             \n\n            <button ion-button icon-only (click)="logout()">\n\n                <ion-icon name="exit"></ion-icon>\n\n            </button>\n\n          </ion-buttons>\n\n\n\n\n\n\n\n      </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding >\n\n  <ion-row>\n\n    <ion-col col-8>\n\n        <ion-item>\n\n            <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> Date</ion-label>\n\n            <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="myDate"></ion-datetime>\n\n          </ion-item>\n\n  </ion-col>\n\n  <ion-col col-4>\n\n      <button ion-button outline icon-right block>hn</button>\n\n  </ion-col>\n\n  </ion-row>\n\n  <ion-row>\n\n      <ion-col col-12>\n\n            <ion-item> \n\n                    <ion-label><ion-icon name="medkit"></ion-icon> Hospital</ion-label>\n\n                    <ion-select [(ngModel)]="notifications" interface="action-sheet" (ionChange)="onSelectChange($event)">\n\n                            <ion-option  *ngFor="let item of selectedHospital; let i = index" value="{{item.hospital_name_thai}}">{{item.hospital_name_thai}}</ion-option>\n\n                 \n\n                    </ion-select>\n\n                  </ion-item>\n\n    </ion-col>\n\n    </ion-row>\n\n   \n\n   \n\n    <ion-row text-center style="margin-left: 4.2%;margin-right: 4.2%;">\n\n      <ion-col col-1 class="colshow" style="background-color:#00BFA5">No</ion-col>\n\n      <ion-col col-4 class="colshow" style="background-color: #00BFA5">HN</ion-col>\n\n      <ion-col col-4 class="colshow" style="background-color: #00BFA5">Opt</ion-col>\n\n      <ion-col col-3 class="colshow" style="background-color: #00BFA5">Date</ion-col>\n\n    </ion-row>\n\n    <ion-scroll scrollX="true" scrollY="true" class="ion-scroll" >\n\n    <ion-row  *ngFor="let item of myDataArray;">\n\n   \n\n        <hr>\n\n        <ion-col col-1 class="colshow" style="background-color: #E0F2F1">sd</ion-col>\n\n        <ion-col col-4 class="colshow" style="background-color: #E0F2F1">sd</ion-col>\n\n        <ion-col col-4 class="colshow" style="background-color: #E0F2F1">sc</ion-col>\n\n        <ion-col col-3 class="colshow" style="background-color: #E0F2F1">sd</ion-col>\n\n      </ion-row>\n\n    </ion-scroll>\n\n   \n\n    \n\n \n\n\n\n\n\n     <ion-row certer text-center>\n\n         <ion-col align-items: flex-start>\n\n                        <!-- <button ion-button outline icon-right block><ion-icon name="add" md="md-add"></ion-icon></button> -->\n\n                <button ion-button outline block  (click)="newcase()"> Newcase &nbsp;  <ion-icon name="add" md="md-add"></ion-icon> </button>   \n\n         </ion-col>\n\n     </ion-row>\n\n     \n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\tonkh\Desktop\Knee\src\pages\home\home.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_toast__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_toast__["a" /* Toast */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_data_service_data_service__["a" /* DataServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_data_service_data_service__["a" /* DataServiceProvider */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_toast__["a" /* Toast */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_4__providers_data_service_data_service__["a" /* DataServiceProvider */]])
 ], HomePage);
 
-var _a, _b, _c, _d, _e;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -689,8 +688,8 @@ AppModule = __decorate([
                     { loadChildren: '../pages/new-case/new-case.module#NewCasePageModule', name: 'NewCasePage', segment: 'new-case', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/service/service.module#ServicePageModule', name: 'ServicePage', segment: 'service', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/welcome/welcome.module#WelcomePageModule', name: 'WelcomePage', segment: 'welcome', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/tabspage/tabspage.module#TabspagePageModule', name: 'TabspagePage', segment: 'tabspage', priority: 'low', defaultHistory: [] }
+                    { loadChildren: '../pages/tabspage/tabspage.module#TabspagePageModule', name: 'TabspagePage', segment: 'tabspage', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/welcome/welcome.module#WelcomePageModule', name: 'WelcomePage', segment: 'welcome', priority: 'low', defaultHistory: [] }
                 ]
             }),
             __WEBPACK_IMPORTED_MODULE_15__angular_http__["b" /* HttpModule */]
