@@ -6,6 +6,7 @@ import { SignupPage } from '../signup/signup';
 import { TabspagePage  } from '../tabspage/tabspage';
 import { HomePage  } from '../home/home';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SQLite , SQLiteObject } from '@ionic-native/sqlite'
 
 /**
  * Generated class for the WelcomePage page.
@@ -26,7 +27,7 @@ export class WelcomePage {
   password : AbstractControl;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ,public formbuilder:FormBuilder,public alertCtrl:AlertController,private splashScreen: SplashScreen) {
+  constructor(public navCtrl: NavController, public navParams: NavParams ,public formbuilder:FormBuilder,public alertCtrl:AlertController,private splashScreen: SplashScreen,private sqlite: SQLite) {
 
     this.splashScreen.show()
     let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
@@ -35,26 +36,31 @@ export class WelcomePage {
           email:['',Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
           password:['',Validators.required]
        });
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WelcomePage');
+    this.createDB();
   }
   
   onlogin(value: any):void{
 
-     if(value.email == "admin@admin.com" && value.password == "admin"){
-         window.localStorage.setItem('email',value.email);
-         window.localStorage.setItem('password',value.password);
-         this.suscessfull(value.email);
-     }else{
-          this.nosuscess();
-     }
+    //  if(value.email == "admin@admin.com" && value.password == "admin"){
+    //      window.localStorage.setItem('email',value.email);
+    //      window.localStorage.setItem('password',value.password);
+    //      this.suscessfull(value.email);
+    //  }else{
+    //       this.nosuscess();
+    //  }
+
+    this.getData(value.email,value.password);
+    
   
   }
 
  
-  signup(){
+   signup(){
     this.navCtrl.push(SignupPage);
     }
 
@@ -93,5 +99,36 @@ export class WelcomePage {
         ]
       });
       alert.present();
+    }
+
+    
+    createDB() {
+      this.sqlite.create({
+        name: 'ionicdb.db',
+        location: 'default' }).then((db: SQLiteObject) => {
+             
+          db.executeSql('CREATE TABLE IF NOT EXISTS datauser(userid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, brand TEXT)', {})
+             .then(res => console.log('Executed SQL'))
+             .catch(e => console.log(e));  
+             
+      }).catch(e => console.log(e));
+    }
+
+    getData(email,password) {
+      this.sqlite.create({
+        name: 'ionicdb.db',
+        location: 'default' }).then((db: SQLiteObject) => {
+              db.executeSql('SELECT * FROM datauser WHERE email=? AND password =?',[email,password]).then(res => {
+              
+              if(res.rows.length > 0){
+                window.localStorage.setItem('email',email);
+                window.localStorage.setItem('password',password);
+                this.suscessfull(email);
+              }else{
+                this. nosuscess();
+              }
+              
+              }).catch(e => console.log(e));  
+      }).catch(e => console.log(e));
     }
 }
