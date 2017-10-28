@@ -25,5 +25,11 @@ export class DataServiceProvider {
 
   }
 
+  LoadHospitalName() {
+    
+       return this.http.get('assets/data/hospital.json').map(res => res.json().hospital);
+    
+      }
+
   
 }

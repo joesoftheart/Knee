@@ -1,6 +1,6 @@
 {
   "name": "Knee",
-  "app_id": "",
+  "app_id": "b9f4b310",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 import { ServicePage } from '../service/service';
-
+import { AlertController } from 'ionic-angular';
 /**
  * Generated class for the NewCasePage page.
  *
@@ -25,7 +25,7 @@ export class NewCasePage {
   selectedProduct: any;
   productFound:boolean = false;
   
-  constructor(public navCtrl: NavController, public navParams: NavController,private barcodeScanner: BarcodeScanner,public dataService: DataServiceProvider) {
+  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavController,private barcodeScanner: BarcodeScanner,public dataService: DataServiceProvider) {
     this.dataService.getListDetails()
     .subscribe((response)=> {
         this.products = response
@@ -77,5 +77,23 @@ export class NewCasePage {
   service(){
     this.navCtrl.push(ServicePage)
   }
+
+
+  Alert(){
+    const alert = this.alertCtrl.create({
+      title: 'Low battery',
+      subTitle: '10% of battery remaining',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+      
+  }
+
+
+  OpenScan(){
+  
+  }
+   
+  
 
 }

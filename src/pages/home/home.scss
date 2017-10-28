@@ -4,11 +4,17 @@ page-home {
      }
 
      .ion-scroll {
-        height: 200px;
+        height: 400px;
+       
       }
       .colshow{
         border: .05px solid black;
         }
+
+        .text{
+            display: inline-block;
+            vertical-align: middle;
+          }
 
 }
 

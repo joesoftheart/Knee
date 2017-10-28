@@ -6,9 +6,9 @@ webpackJsonp([6],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewCasePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_barcode_scanner__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_data_service_data_service__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_data_service_data_service__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_service__ = __webpack_require__(104);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -24,6 +24,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the NewCasePage page.
  *
@@ -31,8 +32,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var NewCasePage = (function () {
-    function NewCasePage(navCtrl, navParams, barcodeScanner, dataService) {
+    function NewCasePage(alertCtrl, navCtrl, navParams, barcodeScanner, dataService) {
         var _this = this;
+        this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.barcodeScanner = barcodeScanner;
@@ -82,13 +84,23 @@ var NewCasePage = (function () {
     NewCasePage.prototype.service = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__service_service__["a" /* ServicePage */]);
     };
+    NewCasePage.prototype.Alert = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Low battery',
+            subTitle: '10% of battery remaining',
+            buttons: ['Dismiss']
+        });
+        alert.present();
+    };
+    NewCasePage.prototype.OpenScan = function () {
+    };
     return NewCasePage;
 }());
 NewCasePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-new-case',template:/*ion-inline-start:"C:\Users\tonkh\Desktop\Knee\src\pages\new-case\new-case.html"*/'<!--\n\n  Generated template for the NewCasePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header >\n\n    <ion-navbar hideBackButton>\n\n        <ion-icon  name="logo-android"></ion-icon>\n\n          <ion-buttons end>\n\n            <button ion-button icon-only (click)="openModal()">\n\n                <ion-icon name="exit"></ion-icon>\n\n            </button>\n\n          </ion-buttons>\n\n\n\n\n\n\n\n      </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n\n\n<ion-content padding id="new-case">\n\n\n\n    <ion-row>\n\n        <ion-col col-8>\n\n            <ion-item>\n\n                <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon></ion-label>\n\n                <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="myDate"></ion-datetime>\n\n              </ion-item>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n          <button ion-button outline block icon-right  >hn</button>\n\n      </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n          <ion-col col-12>\n\n          <ion-item>\n\n            <ion-label>select</ion-label>\n\n            <ion-select [(ngModel)]="hospital" action-sheet>\n\n              <ion-option value="rama">rama</ion-option>\n\n              <ion-option value="siriraj">siriraj</ion-option>\n\n              <ion-option value="saymai">saymai</ion-option>\n\n              <ion-option value="sanamchai">sanamchai</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n        </ion-col>\n\n        </ion-row>\n\n      \n\n        <ion-row>\n\n          <ion-col>\n\n              <p>Patient</p>\n\n            <ion-item >\n\n              <ion-input type="text" placeholder="NAME"></ion-input>\n\n            </ion-item>\n\n            <ion-item >\n\n              <ion-input type="text" placeholder="HN"></ion-input>\n\n            </ion-item>\n\n            <ion-item >\n\n                <ion-input type="text" placeholder="sex"></ion-input>\n\n              </ion-item>\n\n              <ion-item >\n\n                <ion-input type="text" placeholder="AGE (number)"></ion-input>\n\n              </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row>\n\n          <ion-col>\n\n              <p>Case type</p>\n\n              <ion-row>\n\n                <ion-col>\n\n                    <button ion-button full>Primary Hip</button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button full>Revision Hip</button>\n\n                  </ion-col>\n\n              </ion-row>\n\n              <ion-row>\n\n                  <ion-col>\n\n                      <button ion-button full>Primary Knee</button>\n\n                  </ion-col>\n\n                  <ion-col>\n\n                      <button ion-button full>Revision Knee</button>\n\n                    </ion-col>\n\n                </ion-row>\n\n\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row>\n\n          <button ion-button (click)="service()">Service</button>\n\n            <button ion-button (click)="scan()">Scan ... </button>\n\n            <ion-card *ngIf="productFound">\n\n                <ion-card-header>\n\n                  <h2>Price: $ {{selectedProduct.price}}</h2>\n\n                </ion-card-header>\n\n                <ion-card-content>\n\n                  <ul>\n\n                    <li>{{selectedProduct.plu}}</li>\n\n                    <li>{{selectedProduct.name}}</li>\n\n                    <li>{{selectedProduct.desc}}</li>\n\n                  </ul>\n\n                </ion-card-content>\n\n              </ion-card>\n\n        </ion-row>\n\n       \n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\tonkh\Desktop\Knee\src\pages\new-case\new-case.html"*/,
+        selector: 'page-new-case',template:/*ion-inline-start:"C:\Users\tonkh\Desktop\Knee\src\pages\new-case\new-case.html"*/'<!--\n\n  Generated template for the NewCasePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header >\n\n    <ion-navbar >\n\n        <img  src="assets/imgs/icon-40.png" class="logo"/>\n\n        <ion-title class="titleicon" style="display:inline-block" >New Case</ion-title>\n\n          <ion-buttons end>\n\n            <button ion-button icon-only (click)="openModal()">\n\n                <ion-icon name="exit"></ion-icon>\n\n            </button>\n\n          </ion-buttons>\n\n\n\n\n\n\n\n      </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n\n\n<ion-content padding id="new-case">\n\n\n\n    <ion-row>\n\n        <ion-col col-8>\n\n            <ion-item>\n\n                <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon></ion-label>\n\n                <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="myDate"></ion-datetime>\n\n              </ion-item>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n          <button ion-button outline block icon-right  >hn</button>\n\n      </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n          <ion-col col-12>\n\n          <ion-item>\n\n            <ion-label>select</ion-label>\n\n            <ion-select [(ngModel)]="hospital" action-sheet>\n\n              <ion-option value="rama">rama</ion-option>\n\n              <ion-option value="siriraj">siriraj</ion-option>\n\n              <ion-option value="saymai">saymai</ion-option>\n\n              <ion-option value="sanamchai">sanamchai</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n        </ion-col>\n\n        </ion-row>\n\n      \n\n        <ion-row>\n\n          <ion-col>\n\n              <p>Patient</p>\n\n            <ion-item >\n\n              <ion-input type="text" placeholder="NAME"></ion-input>\n\n            </ion-item>\n\n            <ion-item >\n\n              <ion-input type="text" placeholder="HN"></ion-input>\n\n            </ion-item>\n\n            <ion-item >\n\n                <ion-input type="text" placeholder="sex"></ion-input>\n\n              </ion-item>\n\n              <ion-item >\n\n                <ion-input type="text" placeholder="AGE (number)"></ion-input>\n\n              </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row>\n\n          <ion-col>\n\n              <p>Case type</p>\n\n              <ion-row>\n\n                <ion-col>\n\n                    <button ion-button full (click)="OpenScan()">Primary Hip</button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button full>Revision Hip</button>\n\n                  </ion-col>\n\n              </ion-row>\n\n              <ion-row>\n\n                  <ion-col>\n\n                      <button ion-button full>Primary Knee</button>\n\n                  </ion-col>\n\n                  <ion-col>\n\n                      <button ion-button full>Revision Knee</button>\n\n                    </ion-col>\n\n                </ion-row>\n\n\n\n          </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-row>\n\n            <ion-col>\n\n                <p>Implant Profile </p>\n\n                <ion-row>\n\n                  <ion-col text-right id="bar">\n\n                      <ion-icon (click)="scan()" class="icon_barcode ng-hide" ios="ios-barcode" md="md-barcode"></ion-icon>\n\n                  </ion-col>\n\n                \n\n                  </ion-row>\n\n  \n\n            </ion-col>\n\n          </ion-row>\n\n\n\n\n\n        <ion-row>\n\n          <!-- <button ion-button (click)="service()">Service</button> -->\n\n            <!-- <button ion-button (click)="scan()">Scan ... </button> -->\n\n            <ion-card *ngIf="productFound">\n\n                <ion-card-header>\n\n                  <h2>Price: $ {{selectedProduct.price}}</h2>\n\n                </ion-card-header>\n\n                <ion-card-content>\n\n                  <ul>\n\n                    <li>{{selectedProduct.plu}}</li>\n\n                    <li>{{selectedProduct.name}}</li>\n\n                    <li>{{selectedProduct.desc}}</li>\n\n                  </ul>\n\n                </ion-card-content>\n\n              </ion-card>\n\n        </ion-row>\n\n        <button ion-button (click)="name=\'John\'">John</button>\n\n        <button ion-button (click)="name=\'Margaret\'">Margaret</button>\n\n      \n\n        <div ngif="name==\'John\'">\n\n            This is John\n\n        </div>\n\n        <div ngif="name==\'Margaret\'">\n\n          This is Margaret\n\n        </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\tonkh\Desktop\Knee\src\pages\new-case\new-case.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_barcode_scanner__["a" /* BarcodeScanner */], __WEBPACK_IMPORTED_MODULE_3__providers_data_service_data_service__["a" /* DataServiceProvider */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_barcode_scanner__["a" /* BarcodeScanner */], __WEBPACK_IMPORTED_MODULE_3__providers_data_service_data_service__["a" /* DataServiceProvider */]])
 ], NewCasePage);
 
 //# sourceMappingURL=new-case.js.map
@@ -101,8 +113,8 @@ NewCasePage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServicePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_data_service_data_service__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_data_service_data_service__ = __webpack_require__(47);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -167,7 +179,7 @@ ServicePage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -254,7 +266,7 @@ SignupPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WelcomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__signup_signup__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(161);
@@ -394,11 +406,11 @@ var map = {
 		2
 	],
 	"../pages/tabspage/tabspage.module": [
-		278,
+		279,
 		1
 	],
 	"../pages/welcome/welcome.module": [
-		279,
+		278,
 		0
 	]
 };
@@ -424,9 +436,10 @@ module.exports = webpackAsyncContext;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__new_case_new_case__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_toast__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_data_service_data_service__ = __webpack_require__(47);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -440,18 +453,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = (function () {
-    function HomePage(navCtrl, toast, navParams, app) {
+    function HomePage(navCtrl, toast, navParams, app, dataService) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.toast = toast;
         this.navParams = navParams;
         this.app = app;
-        this.myDataArray = ['1', '2', '3', '1', '2', '3', '1', '2', '3'];
+        this.dataService = dataService;
+        this.myDataArray = ['1', '2', '3', '1', '2', '3', '1', '2', '3', '1', '2', '3', '1', '2', '3', '1', '2', '3'];
         this.event = {
             month: '1990-02-19',
             timeStarts: '07:43',
             timeEnds: '1990-02-20'
         };
+        this.hospital = [];
+        this.productFound = false;
+        this.dataService.LoadHospitalName()
+            .subscribe(function (response) {
+            _this.hospital = response;
+            console.log(_this.hospital);
+            _this.selectedHospital = {};
+            _this.selectedHospital = _this.hospital;
+            if (_this.selectedHospital !== undefined) {
+                _this.productFound = true;
+            }
+            else {
+                _this.productFound = false;
+            }
+        });
         this.myDataArray;
         this.email = window.localStorage.getItem('email');
     }
@@ -469,9 +500,9 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\tonkh\Desktop\Knee\src\pages\home\home.html"*/'\n\n  <ion-header >\n\n    <ion-navbar hideBackButton>\n\n        \n\n        <img src="assets/imgs/icon-40.png" class="logo"/> {{email}}\n\n          <ion-buttons end>\n\n            <button ion-button icon-only (click)="logout()">\n\n                <ion-icon name="exit"></ion-icon>\n\n            </button>\n\n          </ion-buttons>\n\n\n\n\n\n\n\n      </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-row>\n\n    <ion-col col-8>\n\n        <ion-item>\n\n            <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon></ion-label>\n\n            <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="myDate"></ion-datetime>\n\n          </ion-item>\n\n  </ion-col>\n\n  <ion-col col-4>\n\n      <button ion-button outline icon-right block>hn</button>\n\n  </ion-col>\n\n  </ion-row>\n\n  <ion-row>\n\n      <ion-col col-8>\n\n      <button ion-button outline icon-right block>Hospital <ion-icon name="medkit"></ion-icon></button>\n\n    </ion-col>\n\n    <ion-col col-4>\n\n        <button ion-button outline icon-right block><ion-icon name="add" md="md-add"></ion-icon></button>\n\n    </ion-col>\n\n    </ion-row>\n\n   \n\n    <ion-scroll scrollY="true" class="ion-scroll">\n\n    <ion-row>\n\n      <ion-col class="colshow"><button ion-button outline full>No</button></ion-col>\n\n      <ion-col class="colshow"><button ion-button outline full>HN</button></ion-col>\n\n      <ion-col class="colshow"><button ion-button outline full>Opt</button></ion-col>\n\n      <ion-col class="colshow"><button ion-button outline full>Date</button></ion-col>\n\n    </ion-row>\n\n   \n\n    <ion-row  *ngFor="let item of myDataArray;">\n\n        <hr>\n\n        <ion-col class="colshow">sdcds</ion-col>\n\n        <ion-col class="colshow">sdcsd</ion-col>\n\n        <ion-col class="colshow">scsds</ion-col>\n\n        <ion-col class="colshow">sdcsd</ion-col>\n\n          \n\n      </ion-row>\n\n    </ion-scroll>\n\n     <ion-row>\n\n         <ion-col>\n\n           \n\n                  \n\n                   \n\n                    \n\n         </ion-col>\n\n     </ion-row>\n\n\n\n\n\n    <button ion-button (click)="newcase()">Newcase  </button>\n\n</ion-content>\n\n\n\n'/*ion-inline-end:"C:\Users\tonkh\Desktop\Knee\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\tonkh\Desktop\Knee\src\pages\home\home.html"*/'\n\n  <ion-header >\n\n    <ion-navbar hideBackButton>\n\n       \n\n            <img  src="assets/imgs/icon-40.png" class="logo"/>\n\n            <ion-title class="titleicon" style="display:inline-block" >Home page</ion-title>\n\n          <ion-buttons end>\n\n             \n\n            <button ion-button icon-only (click)="logout()">\n\n                <ion-icon name="exit"></ion-icon>\n\n            </button>\n\n          </ion-buttons>\n\n\n\n\n\n\n\n      </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding >\n\n  <ion-row>\n\n    <ion-col col-8>\n\n        <ion-item>\n\n            <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> Sort By Date</ion-label>\n\n            <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="myDate"></ion-datetime>\n\n          </ion-item>\n\n  </ion-col>\n\n  <ion-col col-4>\n\n      <button ion-button outline icon-right block>hn</button>\n\n  </ion-col>\n\n  </ion-row>\n\n  <ion-row>\n\n      <ion-col col-12>\n\n            <ion-item> \n\n                    <ion-label><ion-icon name="medkit"></ion-icon> Sort By Hospital</ion-label>\n\n                    <ion-select [(ngModel)]="notifications" interface="action-sheet">\n\n                            <ion-option  *ngFor="let item of selectedHospital; let i = index" value="{{item.hospital_name_thai}}"   >{{item.hospital_name_thai}}</ion-option>\n\n                 \n\n                    </ion-select>\n\n                  </ion-item>\n\n    </ion-col>\n\n    </ion-row>\n\n   \n\n   \n\n    <ion-row text-center style="margin-left: 4.2%;margin-right: 4.2%;">\n\n      <ion-col col-1 class="colshow" style="background-color:#00BFA5">No</ion-col>\n\n      <ion-col col-4 class="colshow" style="background-color: #00BFA5">HN</ion-col>\n\n      <ion-col col-4 class="colshow" style="background-color: #00BFA5">Opt</ion-col>\n\n      <ion-col col-3 class="colshow" style="background-color: #00BFA5">Date</ion-col>\n\n    </ion-row>\n\n    <ion-scroll scrollX="true" scrollY="true" class="ion-scroll" >\n\n    <ion-row  *ngFor="let item of myDataArray;">\n\n   \n\n        <hr>\n\n        <ion-col col-1 class="colshow" style="background-color: #E0F2F1">sd</ion-col>\n\n        <ion-col col-4 class="colshow" style="background-color: #E0F2F1">sd</ion-col>\n\n        <ion-col col-4 class="colshow" style="background-color: #E0F2F1">sc</ion-col>\n\n        <ion-col col-3 class="colshow" style="background-color: #E0F2F1">sd</ion-col>\n\n      </ion-row>\n\n    </ion-scroll>\n\n   \n\n    \n\n \n\n\n\n\n\n     <ion-row certer text-center>\n\n         <ion-col align-items: flex-start>\n\n                        <!-- <button ion-button outline icon-right block><ion-icon name="add" md="md-add"></ion-icon></button> -->\n\n                <button ion-button outline block  (click)="newcase()"> Newcase &nbsp;  <ion-icon name="add" md="md-add"></ion-icon> </button>   \n\n         </ion-col>\n\n     </ion-row>\n\n     \n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\tonkh\Desktop\Knee\src\pages\home\home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_toast__["a" /* Toast */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_toast__["a" /* Toast */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_4__providers_data_service_data_service__["a" /* DataServiceProvider */]])
 ], HomePage);
 
 //# sourceMappingURL=home.js.map
@@ -484,7 +515,7 @@ HomePage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -529,7 +560,7 @@ LoginPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabspagePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -589,7 +620,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(201);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_barcode_scanner__ = __webpack_require__(158);
@@ -601,7 +632,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_tabspage_tabspage__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_new_case_new_case__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_service_service__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_data_service_data_service__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_data_service_data_service__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_http__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_sqlite__ = __webpack_require__(273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_toast__ = __webpack_require__(80);
@@ -654,8 +685,8 @@ AppModule = __decorate([
                     { loadChildren: '../pages/new-case/new-case.module#NewCasePageModule', name: 'NewCasePage', segment: 'new-case', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/service/service.module#ServicePageModule', name: 'ServicePage', segment: 'service', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/tabspage/tabspage.module#TabspagePageModule', name: 'TabspagePage', segment: 'tabspage', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/welcome/welcome.module#WelcomePageModule', name: 'WelcomePage', segment: 'welcome', priority: 'low', defaultHistory: [] }
+                    { loadChildren: '../pages/welcome/welcome.module#WelcomePageModule', name: 'WelcomePage', segment: 'welcome', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/tabspage/tabspage.module#TabspagePageModule', name: 'TabspagePage', segment: 'tabspage', priority: 'low', defaultHistory: [] }
                 ]
             }),
             __WEBPACK_IMPORTED_MODULE_15__angular_http__["b" /* HttpModule */]
@@ -693,7 +724,7 @@ AppModule = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(201);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_welcome_welcome__ = __webpack_require__(106);
@@ -789,7 +820,7 @@ MyApp = __decorate([
 
 /***/ }),
 
-/***/ 79:
+/***/ 47:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -825,6 +856,9 @@ var DataServiceProvider = (function () {
         return this.http.get('assets/data/products.json').map(function (res) { return res.json(); });
     };
     DataServiceProvider.prototype.load = function () {
+        return this.http.get('assets/data/hospital.json').map(function (res) { return res.json().hospital; });
+    };
+    DataServiceProvider.prototype.LoadHospitalName = function () {
         return this.http.get('assets/data/hospital.json').map(function (res) { return res.json().hospital; });
     };
     return DataServiceProvider;
