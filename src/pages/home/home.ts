@@ -24,7 +24,7 @@ export class HomePage {
       }
       hospital : any[] = [];
       selectedHospital : any;
-      productFound:boolean = false;
+      hospitalFound:boolean = false;
       constructor(public navCtrl: NavController,private toast:Toast, public navParams: NavController, public app :App,public dataService: DataServiceProvider) {
         this.dataService.LoadHospitalName()
         .subscribe((response)=> {
@@ -35,9 +35,9 @@ export class HomePage {
           
             this.selectedHospital = this.hospital
             if(this.selectedHospital !== undefined) {
-              this.productFound = true;
+              this.hospitalFound = true;
             } else {
-              this.productFound = false;
+              this.hospitalFound = false;
     
             }
         });
@@ -60,11 +60,23 @@ newcase(){
 this.navCtrl.push(NewCasePage)
 }
 
-
+hospitalCheck:boolean = false;
+hospitalName:any[] = [];
+selectedHospitalName:any;
 onSelectChange(selectedValue: any) {
   console.log('Selected', selectedValue);
 
+    this.selectedHospitalName = {};
+    
+      this.selectedHospitalName = this.hospital
+      if(this.selectedHospitalName !== undefined) {
+        this.hospitalCheck = true;
+      } else {
+        this.hospitalCheck = false;
+
+      }
+    console.log('Out :',this.selectedHospitalName);
+    return this.selectedHospitalName;
+}
 }
 
-
-}

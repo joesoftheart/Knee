@@ -71,23 +71,20 @@
               <p>Case type</p>
               <ion-row>
                 <ion-col>
-                    <button ion-button full (click)="OpenScan()">Primary Hip</button>
-                </ion-col>
-                <ion-col>
-                    <button ion-button full>Revision Hip</button>
-                  </ion-col>
+                  <ion-item> 
+                      <ion-label><ion-icon name="medkit"></ion-icon> Hospital</ion-label>
+                      <ion-select [(ngModel)]="notifications" interface="action-sheet">
+                              <ion-option>Primary Hip</ion-option>
+                              <ion-option>Revision Hip</ion-option>
+                              <ion-option>Primary Knee</ion-option>
+                              <ion-option>Revision Knee</ion-option>
+                      </ion-select>
+                </ion-item>
+              </ion-col>
               </ion-row>
-              <ion-row>
-                  <ion-col>
-                      <button ion-button full>Primary Knee</button>
-                  </ion-col>
-                  <ion-col>
-                      <button ion-button full>Revision Knee</button>
-                    </ion-col>
-                </ion-row>
-
-          </ion-col>
-        </ion-row>
+              </ion-col>
+              </ion-row>
+        
 
         <ion-row>
             <ion-col>
@@ -118,15 +115,19 @@
                   </ul>
                 </ion-card-content>
               </ion-card>
-        </ion-row>
-        <button ion-button (click)="name='John'">John</button>
-        <button ion-button (click)="name='Margaret'">Margaret</button>
-      
-        <div ngif="name=='John'">
-            This is John
-        </div>
-        <div ngif="name=='Margaret'">
-          This is Margaret
-        </div>
 
+              <ion-card *ngFor="let item of dataArray; let i = index">
+                  <ion-card-header *ngIf="selectedProduct">
+                    <h2>Price: $ {{selectedProduct.plu}}</h2>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ul>
+                      <li>{{selectedProduct.plu}}</li>
+                      <li>{{selectedProduct.plu}}</li>
+                      <li>{{selectedProduct.plu}}</li>
+                    </ul>
+                  </ion-card-content>
+                </ion-card>
+        </ion-row>
+       
 </ion-content>

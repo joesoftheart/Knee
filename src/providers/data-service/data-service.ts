@@ -21,7 +21,7 @@ export class DataServiceProvider {
   }
   load() {
 
-   return this.http.get('assets/data/hospital.json').map(res => res.json().hospital);
+   return this.http.get('http://thkjr.emr-life.com/taig/Api/get_database').map(res => res.json().hospital);
 
   }
 

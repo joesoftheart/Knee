@@ -23,6 +23,8 @@ export class NewCasePage {
   options :BarcodeScannerOptions;
   products: any[] = [];
   selectedProduct: any;
+   arr = [];
+  dataArray:any;
   productFound:boolean = false;
   
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavController,private barcodeScanner: BarcodeScanner,public dataService: DataServiceProvider) {
@@ -49,9 +51,13 @@ export class NewCasePage {
   };
     this.selectedProduct = {};
     this.barcodeScanner.scan(scanOption).then((barcodeData) => {
+
+
       this.selectedProduct = this.products.find(product => product.plu === barcodeData.text);
       if(this.selectedProduct !== undefined) {
-        this.productFound = true;
+        
+        this.presentConfirm()
+        
       } else {
         this.productFound = false;
         
@@ -87,6 +93,40 @@ export class NewCasePage {
     });
     alert.present();
       
+  }
+
+  presentConfirm() {
+    const alert = this.alertCtrl.create({
+      title: 'Confirm purchase',
+      message: 'Do you want to buy this book?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.productFound = false;
+          
+          }
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            console.log('Ok');
+            this.productFound = true;
+        
+
+            
+            this.arr.push(this.selectedProduct);
+            
+             
+
+          this.dataArray = this.arr
+            console.log(this.arr)
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 

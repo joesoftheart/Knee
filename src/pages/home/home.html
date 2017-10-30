@@ -18,6 +18,10 @@
 </ion-header>
 
 <ion-content padding >
+    <ion-searchbar
+    [(ngModel)]="myInput"
+    [showCancelButton]="shouldShowCancel">
+  </ion-searchbar>
   <ion-row>
     <ion-col col-8>
         <ion-item>
@@ -34,12 +38,14 @@
             <ion-item> 
                     <ion-label><ion-icon name="medkit"></ion-icon> Hospital</ion-label>
                     <ion-select [(ngModel)]="notifications" interface="action-sheet" (ionChange)="onSelectChange($event)">
-                            <ion-option  *ngFor="let item of selectedHospital; let i = index" value="{{item.hospital_name_thai}}">{{item.hospital_name_thai}}</ion-option>
+                            <ion-option   *ngFor="let item of selectedHospital; let i = index" value="{{item.hospital_name_en}}">{{item.hospital_name_en}}</ion-option>
                  
                     </ion-select>
-                  </ion-item>
+            </ion-item>
     </ion-col>
     </ion-row>
+
+  
    
    
     <ion-row text-center style="margin-left: 4.2%;margin-right: 4.2%;">
@@ -49,13 +55,13 @@
       <ion-col col-3 class="colshow" style="background-color: #00BFA5">Date</ion-col>
     </ion-row>
     <ion-scroll scrollX="true" scrollY="true" class="ion-scroll" >
-    <ion-row  *ngFor="let item of myDataArray;">
-   
-        <hr>
-        <ion-col col-1 class="colshow" style="background-color: #E0F2F1">sd</ion-col>
-        <ion-col col-4 class="colshow" style="background-color: #E0F2F1">sd</ion-col>
-        <ion-col col-4 class="colshow" style="background-color: #E0F2F1">sc</ion-col>
-        <ion-col col-3 class="colshow" style="background-color: #E0F2F1">sd</ion-col>
+    <ion-row  *ngFor="let ite of selectedHospital; let i = index"  >
+        
+        <ion-col *ngIf="i<8" col-1 class="colshow" style="background-color: #E0F2F1">{{i+1}}</ion-col>
+        <ion-col *ngIf="i<8" col-4 class="colshow" style="background-color: #E0F2F1">{{ite.hospital_code}}</ion-col>
+        <ion-col *ngIf="i<8" col-4 class="colshow" style="background-color: #E0F2F1">{{ite.hospital_name_en}}</ion-col>
+        <ion-col *ngIf="i<8" col-3 class="colshow" style="background-color: #E0F2F1">{{ite.hospital_name_thai}}</ion-col>
+      
       </ion-row>
     </ion-scroll>
    
