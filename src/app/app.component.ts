@@ -8,7 +8,7 @@ import { NewCasePage } from '../pages/new-case/new-case';
 import { ServicePage } from '../pages/service/service';
 import { Toast } from '@ionic-native/toast';
 import { Config, ToastController } from 'ionic-angular';
-
+import { DataServiceProvider } from '../providers/data-service/data-service';
 @Component({
   templateUrl: 'app.html'
 })
@@ -16,15 +16,17 @@ export class MyApp {
   rootPage:any = WelcomePage;
   public platform: Platform; //Platform controller
   showedAlert: boolean;
-  constructor(platform: Platform,private toast: Toast, public toastCtrl: ToastController, statusBar: StatusBar, splashScreen: SplashScreen) {
+  hospital : any[] = [];
+  selectedHospital : any;
+  hospitalFound:boolean = false;
+  constructor(platform: Platform,private toast: Toast, public toastCtrl: ToastController, statusBar: StatusBar, splashScreen: SplashScreen,public dataService: DataServiceProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
 
-        
-    
+
       
 
     });

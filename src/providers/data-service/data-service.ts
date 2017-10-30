@@ -16,18 +16,18 @@ export class DataServiceProvider {
     
   }
   getListDetails(){
-   return this.http.get('assets/data/products.json').map(res => res.json());
+   return this.http.get('http://thkjr.emr-life.com/taig/Api/get_database').map(res => res.json().implant_profile);
   
   }
   load() {
 
-   return this.http.get('http://thkjr.emr-life.com/taig/Api/get_database').map(res => res.json().hospital);
+   return this.http.get('http://thkjr.emr-life.com/taig/Api/get_database').map(res => res.json().implant_profile);
 
   }
 
   LoadHospitalName() {
     
-       return this.http.get('assets/data/hospital.json').map(res => res.json().hospital);
+       return this.http.get('http://thkjr.emr-life.com/taig/Api/get_database').map(res => res.json().hospital);
     
       }
 

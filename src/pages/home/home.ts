@@ -4,6 +4,7 @@ import { NewCasePage } from '../new-case/new-case';
 import { Platform } from 'ionic-angular';
 import { Toast } from '@ionic-native/toast';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
+import { LoadingController } from 'ionic-angular';
 import {} from '';
 
 @Component({
@@ -25,7 +26,8 @@ export class HomePage {
       hospital : any[] = [];
       selectedHospital : any;
       hospitalFound:boolean = false;
-      constructor(public navCtrl: NavController,private toast:Toast, public navParams: NavController, public app :App,public dataService: DataServiceProvider) {
+      constructor(public navCtrl: NavController,private toast:Toast, public navParams: NavController, public app :App,public dataService: DataServiceProvider,public loadingCtrl: LoadingController) {
+          this.presentLoadingDefault()
         this.dataService.LoadHospitalName()
         .subscribe((response)=> {
           this.hospital = response
@@ -45,6 +47,18 @@ export class HomePage {
        this.myDataArray
         this.email = window.localStorage.getItem('email');
         
+      }
+
+      presentLoadingDefault() {
+        const loading = this.loadingCtrl.create({
+          content: 'Please wait...'
+        });
+      
+        loading.present();
+      
+        setTimeout(() => {
+          loading.dismiss();
+        }, 5000);
       }
 
   logout(){

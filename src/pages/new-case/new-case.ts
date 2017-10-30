@@ -4,6 +4,7 @@ import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-sca
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 import { ServicePage } from '../service/service';
 import { AlertController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 /**
  * Generated class for the NewCasePage page.
  *
@@ -21,26 +22,64 @@ export class NewCasePage {
   encodeData : string ;
   encodedData : {} ;
   options :BarcodeScannerOptions;
-  products: any[] = [];
-  selectedProduct: any;
+  implant_profile: any[] = [];
+  selectedImpant: any;
    arr = [];
   dataArray:any;
   productFound:boolean = false;
+
+
+  hospital : any[] = [];
+  selectedHospital : any;
+  hospitalFound:boolean = false;
   
-  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavController,private barcodeScanner: BarcodeScanner,public dataService: DataServiceProvider) {
+  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavController,private barcodeScanner: BarcodeScanner,public dataService: DataServiceProvider,public loadingCtrl: LoadingController) {
+    this.presentLoadingDefault()
     this.dataService.getListDetails()
     .subscribe((response)=> {
-        this.products = response
-        console.log(this.products);
-        var myJSONText = JSON.stringify(response);
-        console.log(myJSONText);
+        this.implant_profile = response
+        console.log(this.implant_profile);
+        // var myJSONText = JSON.stringify(response);
+        // console.log(myJSONText);
     });
+
+
+    this.dataService.LoadHospitalName()
+    .subscribe((response)=> {
+      this.hospital = response
+      console.log(this.hospital);
+     
+      this.selectedHospital = {};
+      
+        this.selectedHospital = this.hospital
+        if(this.selectedHospital !== undefined) {
+          this.hospitalFound = true;
+        } else {
+          this.hospitalFound = false;
+
+        }
+      });
   }
   
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewCasePage');
   }
+
+  presentLoadingDefault() {
+    const loading = this.loadingCtrl.create({
+      content: 'Please wait Loading ...'
+              
+      
+    });
+  
+    loading.present();
+  
+    setTimeout(() => {
+      loading.dismiss();
+    }, 10000);
+  }
+
 
   scan() {
     var scanOption = {
@@ -49,18 +88,17 @@ export class NewCasePage {
       "showTorchButton" : false, // แสดงปุ่ม icon ไฟแฟลส
       "prompt" : "ให้ตำแหน่งของ barcode อยู่ภายในพื้นที่ scan", // ข้อความกำหนดเอง
   };
-    this.selectedProduct = {};
+    this.selectedImpant = {};
     this.barcodeScanner.scan(scanOption).then((barcodeData) => {
 
 
-      this.selectedProduct = this.products.find(product => product.plu === barcodeData.text);
-      if(this.selectedProduct !== undefined) {
-        
-        this.presentConfirm()
-        
+      this.selectedImpant = this.implant_profile.find(implant => implant.barcode === barcodeData.text);
+      if(this.selectedImpant !== undefined) {
+        console.log('have text');
+        this.presentConfirm(this.selectedImpant)
       } else {
         this.productFound = false;
-        
+        console.log('have text');
         
       }
     }, (err) => {
@@ -95,10 +133,13 @@ export class NewCasePage {
       
   }
 
-  presentConfirm() {
+  presentConfirm(selectedImpant) {
     const alert = this.alertCtrl.create({
-      title: 'Confirm purchase',
-      message: 'Do you want to buy this book?',
+      title: 'Confirm Implant',
+      message: "Brand :" + "xxxx" + 
+      "Model :" + selectedImpant.component_description + 
+      "Site :" + "xxxx" +
+      "Size : " + selectedImpant.size,
       buttons: [
         {
           text: 'Cancel',
@@ -116,7 +157,7 @@ export class NewCasePage {
         
 
             
-            this.arr.push(this.selectedProduct);
+            this.arr.push(this.selectedImpant);
             
              
 
