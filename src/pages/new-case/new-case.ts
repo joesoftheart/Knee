@@ -5,6 +5,12 @@ import { DataServiceProvider } from '../../providers/data-service/data-service';
 import { ServicePage } from '../service/service';
 import { AlertController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { FormBuilder , Validators, FormGroup ,AbstractControl ,ValidatorFn} from '@angular/forms';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { Toast } from '@ionic-native/toast';
+
+
+
 /**
  * Generated class for the NewCasePage page.
  *
@@ -32,8 +38,17 @@ export class NewCasePage {
   hospital : any[] = [];
   selectedHospital : any;
   hospitalFound:boolean = false;
+
+  formCase: FormGroup;
+  date : AbstractControl;
+  hos : AbstractControl;
+  name : AbstractControl;
+  hn : AbstractControl;
+  sex : AbstractControl;
+  age : AbstractControl;
+  casetype : AbstractControl;
   
-  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavController,private barcodeScanner: BarcodeScanner,public dataService: DataServiceProvider,public loadingCtrl: LoadingController) {
+  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavController,private barcodeScanner: BarcodeScanner,public dataService: DataServiceProvider,public loadingCtrl: LoadingController,public formbuild:FormBuilder,private toast: Toast,private sqlite: SQLite) {
     this.presentLoadingDefault()
     this.dataService.getListDetails()
     .subscribe((response)=> {
@@ -59,12 +74,73 @@ export class NewCasePage {
 
         }
       });
+
+
+      this.formCase = formbuild.group({
+        date :['',Validators.required],
+        hos:['',Validators.required],
+        name : ['',Validators.required],
+        hn :['',Validators.required],
+        sex:['' , Validators.required],
+        age:['',Validators.required],
+        casetype:['',Validators.required]
+       });
+
+          this.date = this.formCase.controls['date'];
+          this.hos = this.formCase.controls['hos'];
+          this.name = this.formCase.controls['name'];
+          this.hn = this.formCase.controls['hn'];
+          this.sex = this.formCase.controls['sex'];
+          this.age = this.formCase.controls['aage'];
+          this.casetype = this.formCase.controls['casetype'];
   }
   
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewCasePage');
   }
+
+
+  onAddCase(value : any ):void{
+    console.log(this.formCase.value);
+    console.log("SaveDataCase");
+    this.saveData();
+ }
+
+ saveData() {
+   this.sqlite.create({
+     name: 'ionicdb.db',
+     location: 'default'
+   }).then((db: SQLiteObject) => {
+     db.executeSql('INSERT INTO casetype VALUES(NULL,?,?,?,?,?,?,?)',[this.date.value,this.hos.value,this.name.value,this.hn.value,this.sex.value,this.age.value,this.casetype.value])
+       .then(res => {
+         console.log(res);
+         this.toast.show('Data saved', '5000', 'center').subscribe(
+           toast => {
+             
+           }
+         );
+       })
+       .catch(e => {
+         console.log(e);
+         this.toast.show(e, '5000', 'center').subscribe(
+           toast => {
+             console.log(toast);
+           }
+         );
+       });
+   }).catch(e => {
+     console.log(e);
+     this.toast.show(e, '5000', 'center').subscribe(
+       toast => {
+         console.log(toast);
+       }
+     );
+   });
+ }
+
+
+
 
   presentLoadingDefault() {
     const loading = this.loadingCtrl.create({

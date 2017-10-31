@@ -23,17 +23,17 @@ import { SQLite , SQLiteObject } from '@ionic-native/sqlite'
 export class WelcomePage {
 
   loginform : FormGroup;
-  email : AbstractControl;
+  username : AbstractControl;
   password : AbstractControl;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams ,public formbuilder:FormBuilder,public alertCtrl:AlertController,private splashScreen: SplashScreen,private sqlite: SQLite) {
 
     this.splashScreen.show()
-    let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
+    //let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
       
     this.loginform = formbuilder.group({
-          email:['',Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
+          username:['',Validators.required],
           password:['',Validators.required]
        });
 
@@ -54,7 +54,7 @@ export class WelcomePage {
     //       this.nosuscess();
     //  }
 
-    this.getData(value.email,value.password);
+    this.getData(value.username,value.password);
     
   
   }
@@ -107,23 +107,27 @@ export class WelcomePage {
         name: 'ionicdb.db',
         location: 'default' }).then((db: SQLiteObject) => {
              
-          db.executeSql('CREATE TABLE IF NOT EXISTS datauser(userid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, brand TEXT)', {})
+          db.executeSql('CREATE TABLE IF NOT EXISTS datauser(userid INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, password TEXT)', {})
              .then(res => console.log('Executed SQL'))
+             .catch(e => console.log(e)); 
+             
+          db.executeSql('CREATE TABLE IF NOT EXISTS casetype(caseid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, hospital TEXT, name TEXT,hn TEXT, sex TEXT, age TEXT, case TEXT)', {})
+             .then(res => console.log('Executed SQL casetype'))
              .catch(e => console.log(e));  
              
       }).catch(e => console.log(e));
     }
 
-    getData(email,password) {
+    getData(username,password) {
       this.sqlite.create({
         name: 'ionicdb.db',
         location: 'default' }).then((db: SQLiteObject) => {
-              db.executeSql('SELECT * FROM datauser WHERE email=? AND password =?',[email,password]).then(res => {
+              db.executeSql('SELECT * FROM datauser WHERE username=? AND password =?',[username,password]).then(res => {
               
               if(res.rows.length > 0){
-                window.localStorage.setItem('email',email);
+                window.localStorage.setItem('username',username);
                 window.localStorage.setItem('password',password);
-                this.suscessfull(email);
+                this.suscessfull(username);
               }else{
                 this. nosuscess();
               }

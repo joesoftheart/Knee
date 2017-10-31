@@ -5,7 +5,7 @@ import { Platform } from 'ionic-angular';
 import { Toast } from '@ionic-native/toast';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 import { LoadingController } from 'ionic-angular';
-import {} from '';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 @Component({
   selector: 'page-home',
@@ -14,8 +14,8 @@ import {} from '';
 export class HomePage {
   public platform: Platform; //Platform controller
  
-  email: string;
-
+  username: string;
+  datacase: any = [];
   myDataArray = ['1', '2', '3','1', '2', '3','1', '2', '3','1', '2', '3','1', '2', '3','1', '2', '3'];
 
     public event = {
@@ -26,7 +26,7 @@ export class HomePage {
       hospital : any[] = [];
       selectedHospital : any;
       hospitalFound:boolean = false;
-      constructor(public navCtrl: NavController,private toast:Toast, public navParams: NavController, public app :App,public dataService: DataServiceProvider,public loadingCtrl: LoadingController) {
+      constructor(public navCtrl: NavController,private toast:Toast, public navParams: NavController, public app :App,public dataService: DataServiceProvider,public loadingCtrl: LoadingController,private sqlite:SQLite) {
           this.presentLoadingDefault()
         this.dataService.LoadHospitalName()
         .subscribe((response)=> {
@@ -45,9 +45,16 @@ export class HomePage {
         });
         
        this.myDataArray
-        this.email = window.localStorage.getItem('email');
+        this.username = window.localStorage.getItem('username');
+        
         
       }
+
+      ionViewDidLoad() {
+        console.log('ionViewDidLoad HomePage');
+        this.getData();
+      }
+    
 
       presentLoadingDefault() {
         const loading = this.loadingCtrl.create({
@@ -63,7 +70,7 @@ export class HomePage {
 
   logout(){
     // Remove API token 
-    window.localStorage.removeItem('email');
+    window.localStorage.removeItem('username');
     window.localStorage.removeItem('password');
     const root = this.app.getRootNav();
     root.popToRoot();
@@ -92,5 +99,27 @@ onSelectChange(selectedValue: any) {
     console.log('Out :',this.selectedHospitalName);
     return this.selectedHospitalName;
 }
+
+getData() {
+  this.sqlite.create({
+    name: 'ionicdb.db',
+    location: 'default' }).then((db: SQLiteObject) => {
+          db.executeSql('SELECT * FROM casetype ORDER BY caseid DESC', {}).then(res => {
+          this.datacase = [];
+            for(var i=0; i<res.rows.length; i++) {
+            this.datacase.push({caseid:res.rows.item(i).caseid,date:res.rows.item(i).date,hn:res.rows.item(i).hn,sex:res.rows.item(i).sex,age:res.rows.item(i).age,case:res.rows.item(i).case})
+            }
+            this.toast.show('getCaseType', '5000', 'center').subscribe(
+              toast => {
+                  
+              }
+            );
+          }).catch(e => console.log(e));  
+  }).catch(e => console.log(e));
+}
+
+
+
+
 }
 

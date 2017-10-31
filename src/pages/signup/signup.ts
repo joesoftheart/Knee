@@ -19,6 +19,7 @@ import { Toast } from '@ionic-native/toast';
 export class SignupPage {
 
  formregister: FormGroup;
+ username : AbstractControl;
  email : AbstractControl;
  password : AbstractControl;
  password_confirm: AbstractControl;
@@ -30,16 +31,18 @@ export class SignupPage {
     let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
     
       this.formregister = formbuilder.group({
+          username :['',Validators.required],
           email:['',Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
           password:['',Validators.required],
           password_confirm:['',Validators.compose([Validators.required,this.equalto('password')])],
-          brand:['',Validators.required]
+          // brand:['',Validators.required]
      });
-
+  
+     this.username = this.formregister.controls['username'];
      this.email    = this.formregister.controls['email'];
      this.password = this.formregister.controls['password'];
      this.password_confirm = this.formregister.controls['password_confirm'];
-     this.brand = this.formregister.controls['brand'];
+    //  this.brand = this.formregister.controls['brand'];
   }
 
   ionViewDidLoad() {
@@ -85,7 +88,7 @@ export class SignupPage {
         name: 'ionicdb.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
-        db.executeSql('INSERT INTO datauser  VALUES(NULL,?,?,?)',[this.email.value,this.password.value,this.brand.value])
+        db.executeSql('INSERT INTO datauser  VALUES(NULL,?,?,?)',[this.username.value,this.email.value,this.password.value])
           .then(res => {
             console.log(res);
             this.toast.show('Data saved', '5000', 'center').subscribe(

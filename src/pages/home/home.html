@@ -55,12 +55,12 @@
       <ion-col col-3 class="colshow" style="background-color: #00BFA5">Date</ion-col>
     </ion-row>
     <ion-scroll scrollX="true" scrollY="true" class="ion-scroll" >
-    <ion-row  *ngFor="let ite of selectedHospital; let i = index"  >
+    <ion-row  *ngFor="let ite of datacase; let i = index"  >
         
-        <ion-col *ngIf="i<8" col-1 class="colshow" style="background-color: #E0F2F1">{{i+1}}</ion-col>
-        <ion-col *ngIf="i<8" col-4 class="colshow" style="background-color: #E0F2F1">{{ite.hospital_code}}</ion-col>
-        <ion-col *ngIf="i<8" col-4 class="colshow" style="background-color: #E0F2F1">{{ite.hospital_name_en}}</ion-col>
-        <ion-col *ngIf="i<8" col-3 class="colshow" style="background-color: #E0F2F1">{{ite.hospital_name_thai}}</ion-col>
+        <ion-col *ngIf="i<8" col-1 class="colshow" style="background-color: #E0F2F1">{{ite.caseid}}</ion-col>
+        <ion-col *ngIf="i<8" col-4 class="colshow" style="background-color: #E0F2F1">{{ite.hn}}</ion-col>
+        <ion-col *ngIf="i<8" col-4 class="colshow" style="background-color: #E0F2F1">{{ite.name}}</ion-col>
+        <ion-col *ngIf="i<8" col-3 class="colshow" style="background-color: #E0F2F1">{{ite.date}}</ion-col>
       
       </ion-row>
     </ion-scroll>

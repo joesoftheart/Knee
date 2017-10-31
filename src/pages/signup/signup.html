@@ -27,6 +27,18 @@
    <form [formGroup]= "formregister" (ngSubmit)="onRegister(formregister.value)">
   
       <ion-row>
+
+          <ion-col>
+              <ion-item>
+                <ion-label stacked>username</ion-label>
+                <ion-input type="text"  placeholder="Username" formControlName="username"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="formregister.controls.username.hasError('required') && formregister.controls.username.touched">
+                 <p><font color="red"> * Username is required t</font></p>
+               </ion-item>
+             </ion-col>
+          </ion-row>
+          <ion-row>
           <ion-col>
            <ion-item>
              <ion-label stacked>Email</ion-label>
@@ -61,7 +73,7 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
+          <!-- <ion-col>
               <ion-item>
                 <ion-label stacked>Brand</ion-label>
                 <ion-select [(ngModel)]="Brand" formControlName="brand">
@@ -75,7 +87,7 @@
               <ion-item *ngIf="formregister.controls.brand.hasError('required') && formregister.controls.brand.touched">
                   <p><font color="red"> * Brand is required</font></p>
                 </ion-item>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
         <ion-row>
           <ion-col>

@@ -24,79 +24,108 @@
 
 <ion-content padding id="new-case">
 
+  <form [formGroup]="formCase" (ngSubmit)="onAddCase(formCase.value)">
     <ion-row>
-        <ion-col col-8>
-            <ion-item>
-                <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon></ion-label>
-                <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="myDate"></ion-datetime>
-              </ion-item>
+      <ion-col col-8>
+          <ion-item>
+              <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon></ion-label>
+              <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="myDate" formControlName="date"></ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="formCase.controls.date.hasError('required') && formCase.controls.date.touched">
+            <p><font color="red"> * Date is required</font></p>
+          </ion-item>
+    </ion-col>
+    <ion-col col-4>
+        <button ion-button outline block icon-right  >hn</button>
+    </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+      <ion-item>
+        <ion-label>select</ion-label>
+        <ion-select [(ngModel)]="hospital" action-sheet formControlName="hos">
+          <ion-option value="rama">rama</ion-option>
+          <ion-option value="siriraj">siriraj</ion-option>
+          <ion-option value="saymai">saymai</ion-option>
+          <ion-option value="sanamchai">sanamchai</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="formCase.controls.hos.hasError('required') && formCase.controls.hos.touched">
+        <p><font color="red"> * Hospital is required</font></p>
+      </ion-item>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          <p>Patient</p>
+        <ion-item >
+          <ion-input type="text" placeholder="NAME" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="formCase.controls.name.hasError('required') && formCase.controls.name.touched">
+          <p><font color="red"> * Name is required</font></p>
+        </ion-item>
+        <ion-item >
+          <ion-input type="text" placeholder="HN" formControlName="hn"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="formCase.controls.hn.hasError('required') && formCase.controls.hn.touched">
+          <p><font color="red"> * HN is required</font></p>
+        </ion-item>
+        <ion-item >
+            <ion-input type="text" placeholder="sex" formControlName="sex"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="formCase.controls.sex.hasError('required') && formCase.controls.sex.touched">
+            <p><font color="red"> * Sex is required</font></p>
+          </ion-item>
+          <ion-item >
+            <ion-input type="text" placeholder="AGE (number)" formControlName="age"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="formCase.controls.age.hasError('required') && formCase.controls.age.touched">
+            <p><font color="red"> * Age is required</font></p>
+          </ion-item>
       </ion-col>
-      <ion-col col-4>
-          <button ion-button outline block icon-right  >hn</button>
-      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          <p>Case type</p>
+          <ion-row>
+            <ion-col>
+              <ion-item> 
+                  <ion-label><ion-icon name="medkit"></ion-icon> Hospital</ion-label>
+                  <ion-select [(ngModel)]="notifications" interface="action-sheet" formControlName="casetype">
+                          <ion-option>Primary Hip</ion-option>
+                          <ion-option>Revision Hip</ion-option>
+                          <ion-option>Primary Knee</ion-option>
+                          <ion-option>Revision Knee</ion-option>
+                  </ion-select>
+            </ion-item>
+            <ion-item *ngIf="formCase.controls.casetype.hasError('required') && formCase.controls.casetype.touched">
+              <p><font color="red"> * Case Type is required</font></p>
+            </ion-item>
+          </ion-col>
+          </ion-row>
+          </ion-col>
+          </ion-row>
+   
+
+    <ion-row>
+        <ion-col>
+            <p>Implant Profile </p>
+            <ion-row>
+              <ion-col text-right id="bar">
+                  <ion-icon (click)="scan()" class="icon_barcode ng-hide" ios="ios-barcode" md="md-barcode"></ion-icon>
+              </ion-col>
+            
+              </ion-row>
+
+        </ion-col>
       </ion-row>
       <ion-row>
-          <ion-col col-12>
-          <ion-item>
-            <ion-label>select</ion-label>
-            <ion-select [(ngModel)]="notifications" interface="action-sheet">
-              <ion-option   *ngFor="let item of selectedHospital; let i = index" value="{{item.hospital_name_en}}">{{item.hospital_name_en}}</ion-option>
-   
-      </ion-select>
-          </ion-item>
+        <ion-col>
+          <button ion-button full type="submit" [disabled]="!formCase.valid">Sign up</button>
         </ion-col>
-        </ion-row>
-      
-        <ion-row>
-          <ion-col>
-              <p>Patient</p>
-            <ion-item >
-              <ion-input type="text" name="name" placeholder="NAME"></ion-input>
-            </ion-item>
-            <ion-item >
-              <ion-input type="text" name="hn" placeholder="HN"></ion-input>
-            </ion-item>
-            <ion-item >
-                <ion-input type="text" name="sex" placeholder="sex"></ion-input>
-              </ion-item>
-              <ion-item >
-                <ion-input type="text" name="age" placeholder="AGE (number)"></ion-input>
-              </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-              <p>Case type</p>
-              <ion-row>
-                <ion-col>
-                  <ion-item> 
-                      <ion-label><ion-icon name="medkit"></ion-icon> Hospital</ion-label>
-                      <ion-select [(ngModel)]="notifications" interface="action-sheet" name="case_type">
-                              <ion-option>Primary Hip</ion-option>
-                              <ion-option>Revision Hip</ion-option>
-                              <ion-option>Primary Knee</ion-option>
-                              <ion-option>Revision Knee</ion-option>
-                      </ion-select>
-                </ion-item>
-              </ion-col>
-              </ion-row>
-              </ion-col>
-              </ion-row>
-        
-
-        <ion-row>
-            <ion-col>
-                <p>Implant Profile </p>
-                <ion-row>
-                  <ion-col text-right id="bar">
-                      <ion-icon (click)="scan()" class="icon_barcode ng-hide" ios="ios-barcode" md="md-barcode"></ion-icon>
-                  </ion-col>
-                
-                  </ion-row>
-  
-            </ion-col>
-          </ion-row>
-
+      </ion-row>
+    </form>
 
         <ion-row>
           <!-- <button ion-button (click)="service()">Service</button> -->

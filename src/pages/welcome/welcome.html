@@ -17,19 +17,19 @@
       <form [formGroup]= "loginform" (ngSubmit)="onlogin(loginform.value)" >
         <ion-row>
             <ion-item>
-                  <ion-label stacked>Email</ion-label>
-                  <ion-input type="email"  placeholder="admin@aadmin.com"  formControlName="email" ></ion-input>
+                  <ion-label stacked>Username</ion-label>
+                  <ion-input type="text"  placeholder="Username"  formControlName="username" ></ion-input>
             </ion-item>
-             <ion-item *ngIf="loginform.controls.email.hasError('pattern') && loginform.controls.email.touched">
-                <p><font color="red"> * Email is invalid format</font></p>
+             <ion-item *ngIf="loginform.controls.username.hasError('required') && loginform.controls.username.touched">
+                <p><font color="red"> * Username is required </font></p>
               </ion-item>
             <ion-item>
                   <ion-label stacked>Password</ion-label>
-                  <ion-input type="password"  placeholder="admin"  formControlName="password"></ion-input>
+                  <ion-input type="password"  placeholder="Password"  formControlName="password"></ion-input>
                 </ion-item>
               <ion-col center text-center>
-                <button ion-button full color="lightText" [disabled]= "!loginform.valid"  type="submit" >Log in</button>
-                <!-- <button ion-button full (click)="go()">Log in</button> -->
+                <!-- <button ion-button full color="lightText" [disabled]= "!loginform.valid"  type="submit" >Log in</button> -->
+                <button ion-button full (click)="go()">Log in</button>
               </ion-col>
         </ion-row>
       </form>
