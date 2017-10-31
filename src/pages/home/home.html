@@ -1,9 +1,11 @@
 
   <ion-header >
     <ion-navbar hideBackButton>
-        
-        <img src="assets/imgs/icon-40.png" class="logo"/> {{email}}
+       
+            <img  src="assets/imgs/icon-40.png" class="logo"/>
+            <ion-title class="titleicon" style="display:inline-block" >Home page</ion-title>
           <ion-buttons end>
+             
             <button ion-button icon-only (click)="logout()">
                 <ion-icon name="exit"></ion-icon>
             </button>
@@ -15,11 +17,15 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding >
+    <ion-searchbar
+    [(ngModel)]="myInput"
+    [showCancelButton]="shouldShowCancel">
+  </ion-searchbar>
   <ion-row>
     <ion-col col-8>
         <ion-item>
-            <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon></ion-label>
+            <ion-label text-rigth><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> Date</ion-label>
             <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="myDate"></ion-datetime>
           </ion-item>
   </ion-col>
@@ -28,43 +34,46 @@
   </ion-col>
   </ion-row>
   <ion-row>
-      <ion-col col-8>
-      <button ion-button outline icon-right block>Hospital <ion-icon name="medkit"></ion-icon></button>
-    </ion-col>
-    <ion-col col-4>
-        <button ion-button outline icon-right block><ion-icon name="add" md="md-add"></ion-icon></button>
+      <ion-col col-12>
+            <ion-item> 
+                    <ion-label><ion-icon name="medkit"></ion-icon> Hospital</ion-label>
+                    <ion-select [(ngModel)]="notifications" interface="action-sheet" (ionChange)="onSelectChange($event)">
+                            <ion-option   *ngFor="let item of selectedHospital; let i = index" value="{{item.hospital_name_en}}">{{item.hospital_name_en}}</ion-option>
+                 
+                    </ion-select>
+            </ion-item>
     </ion-col>
     </ion-row>
+
+  
    
    
-    <ion-row text-center style="margin-left: 4%;margin-right: 4%;">
-      <ion-col style="background-color:#00BFA5">No</ion-col>
-      <ion-col style="background-color: #00BFA5">HN</ion-col>
-      <ion-col style="background-color: #00BFA5">Opt</ion-col>
-      <ion-col style="background-color: #00BFA5">Date</ion-col>
+    <ion-row text-center style="margin-left: 4.2%;margin-right: 4.2%;">
+      <ion-col col-1 class="colshow" style="background-color:#00BFA5">No</ion-col>
+      <ion-col col-4 class="colshow" style="background-color: #00BFA5">HN</ion-col>
+      <ion-col col-4 class="colshow" style="background-color: #00BFA5">Opt</ion-col>
+      <ion-col col-3 class="colshow" style="background-color: #00BFA5">Date</ion-col>
     </ion-row>
-    <ion-scroll scrollY="true" class="ion-scroll">
-    <ion-row  *ngFor="let item of myDataArray;">
-   
-        <hr>
-        <ion-col class="colshow" style="background-color: #E0F2F1">sdcds</ion-col>
-        <ion-col class="colshow" style="background-color: #E0F2F1">sdcsd</ion-col>
-        <ion-col class="colshow" style="background-color: #E0F2F1">scsds</ion-col>
-        <ion-col class="colshow" style="background-color: #E0F2F1">sdcsd</ion-col>
+    <ion-scroll scrollX="true" scrollY="true" class="ion-scroll" >
+    <ion-row  *ngFor="let ite of selectedHospital; let i = index"  >
+        
+        <ion-col *ngIf="i<8" col-1 class="colshow" style="background-color: #E0F2F1">{{i+1}}</ion-col>
+        <ion-col *ngIf="i<8" col-4 class="colshow" style="background-color: #E0F2F1">{{ite.hospital_code}}</ion-col>
+        <ion-col *ngIf="i<8" col-4 class="colshow" style="background-color: #E0F2F1">{{ite.hospital_name_en}}</ion-col>
+        <ion-col *ngIf="i<8" col-3 class="colshow" style="background-color: #E0F2F1">{{ite.hospital_name_thai}}</ion-col>
+      
       </ion-row>
     </ion-scroll>
-    
+   
     
  
 
 
      <ion-row certer text-center>
          <ion-col align-items: flex-start>
-                <button ion-button (click)="newcase()">Newcase  </button>   
+                        <!-- <button ion-button outline icon-right block><ion-icon name="add" md="md-add"></ion-icon></button> -->
+                <button ion-button outline block  (click)="newcase()"> Newcase &nbsp;  <ion-icon name="add" md="md-add"></ion-icon> </button>   
          </ion-col>
      </ion-row>
-
-
-   
+     
 </ion-content>
-

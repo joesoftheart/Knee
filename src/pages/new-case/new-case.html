@@ -5,8 +5,9 @@
   Ionic pages and navigation.
 -->
 <ion-header >
-    <ion-navbar hideBackButton>
-        <ion-icon  name="logo-android"></ion-icon>
+    <ion-navbar >
+        <img  src="assets/imgs/icon-40.png" class="logo"/>
+        <ion-title class="titleicon" style="display:inline-block" >New Case</ion-title>
           <ion-buttons end>
             <button ion-button icon-only (click)="openModal()">
                 <ion-icon name="exit"></ion-icon>
@@ -38,12 +39,10 @@
           <ion-col col-12>
           <ion-item>
             <ion-label>select</ion-label>
-            <ion-select [(ngModel)]="hospital" action-sheet>
-              <ion-option value="rama">rama</ion-option>
-              <ion-option value="siriraj">siriraj</ion-option>
-              <ion-option value="saymai">saymai</ion-option>
-              <ion-option value="sanamchai">sanamchai</ion-option>
-            </ion-select>
+            <ion-select [(ngModel)]="notifications" interface="action-sheet">
+              <ion-option   *ngFor="let item of selectedHospital; let i = index" value="{{item.hospital_name_en}}">{{item.hospital_name_en}}</ion-option>
+   
+      </ion-select>
           </ion-item>
         </ion-col>
         </ion-row>
@@ -52,16 +51,16 @@
           <ion-col>
               <p>Patient</p>
             <ion-item >
-              <ion-input type="text" placeholder="NAME"></ion-input>
+              <ion-input type="text" name="name" placeholder="NAME"></ion-input>
             </ion-item>
             <ion-item >
-              <ion-input type="text" placeholder="HN"></ion-input>
+              <ion-input type="text" name="hn" placeholder="HN"></ion-input>
             </ion-item>
             <ion-item >
-                <ion-input type="text" placeholder="sex"></ion-input>
+                <ion-input type="text" name="sex" placeholder="sex"></ion-input>
               </ion-item>
               <ion-item >
-                <ion-input type="text" placeholder="AGE (number)"></ion-input>
+                <ion-input type="text" name="age" placeholder="AGE (number)"></ion-input>
               </ion-item>
           </ion-col>
         </ion-row>
@@ -70,27 +69,39 @@
               <p>Case type</p>
               <ion-row>
                 <ion-col>
-                    <button ion-button full>Primary Hip</button>
-                </ion-col>
-                <ion-col>
-                    <button ion-button full>Revision Hip</button>
-                  </ion-col>
+                  <ion-item> 
+                      <ion-label><ion-icon name="medkit"></ion-icon> Hospital</ion-label>
+                      <ion-select [(ngModel)]="notifications" interface="action-sheet" name="case_type">
+                              <ion-option>Primary Hip</ion-option>
+                              <ion-option>Revision Hip</ion-option>
+                              <ion-option>Primary Knee</ion-option>
+                              <ion-option>Revision Knee</ion-option>
+                      </ion-select>
+                </ion-item>
+              </ion-col>
               </ion-row>
-              <ion-row>
-                  <ion-col>
-                      <button ion-button full>Primary Knee</button>
-                  </ion-col>
-                  <ion-col>
-                      <button ion-button full>Revision Knee</button>
-                    </ion-col>
-                </ion-row>
+              </ion-col>
+              </ion-row>
+        
 
-          </ion-col>
-        </ion-row>
         <ion-row>
-          <button ion-button (click)="service()">Service</button>
-            <button ion-button (click)="scan()">Scan ... </button>
-            <ion-card *ngIf="productFound">
+            <ion-col>
+                <p>Implant Profile </p>
+                <ion-row>
+                  <ion-col text-right id="bar">
+                      <ion-icon (click)="scan()" class="icon_barcode ng-hide" ios="ios-barcode" md="md-barcode"></ion-icon>
+                  </ion-col>
+                
+                  </ion-row>
+  
+            </ion-col>
+          </ion-row>
+
+
+        <ion-row>
+          <!-- <button ion-button (click)="service()">Service</button> -->
+            <!-- <button ion-button (click)="scan()">Scan ... </button> -->
+            <!-- <ion-card *ngIf="productFound">
                 <ion-card-header>
                   <h2>Price: $ {{selectedProduct.price}}</h2>
                 </ion-card-header>
@@ -101,8 +112,20 @@
                     <li>{{selectedProduct.desc}}</li>
                   </ul>
                 </ion-card-content>
-              </ion-card>
+              </ion-card> -->
+
+              <ion-card *ngFor="let item of dataArray; let i = index">
+                  <ion-card-header *ngIf="selectedImpant">
+                    <h2>No : {{i}} Implant</h2>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ul>
+                      <li>{{item.component_description}}</li>
+                      <li>{{item.size}}</li>
+                    
+                    </ul>
+                  </ion-card-content>
+                </ion-card>
         </ion-row>
        
-
 </ion-content>

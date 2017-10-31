@@ -15,18 +15,18 @@ import { DataServiceProvider } from '../../providers/data-service/data-service';
 })
 
 export class ServicePage {
-  products: any[] = [];
+  implant_profile: any[] = [];
   selectedProduct: any;
   productFound:boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public dataService: DataServiceProvider) {
     this.dataService.load()
     .subscribe((response)=> {
-      this.products = response
-      console.log(this.products);
+      this.implant_profile = response
+      console.log(this.implant_profile);
      
       this.selectedProduct = {};
       
-        this.selectedProduct = this.products
+        this.selectedProduct = this.implant_profile
         if(this.selectedProduct !== undefined) {
           this.productFound = true;
         } else {
