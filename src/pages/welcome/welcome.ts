@@ -111,7 +111,7 @@ export class WelcomePage {
              .then(res => console.log('Executed SQL'))
              .catch(e => console.log(e)); 
              
-          db.executeSql('CREATE TABLE IF NOT EXISTS casetype(caseid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, hospital TEXT, name TEXT,hn TEXT, sex TEXT, age TEXT, case TEXT)', {})
+          db.executeSql('CREATE TABLE IF NOT EXISTS casetype(caseid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, hospital TEXT, name TEXT,hn TEXT, gender TEXT, age TEXT, case TEXT)', {})
              .then(res => console.log('Executed SQL casetype'))
              .catch(e => console.log(e));  
              

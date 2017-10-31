@@ -30,6 +30,16 @@ export class DataServiceProvider {
        return this.http.get('http://thkjr.emr-life.com/taig/Api/get_database').map(res => res.json().hospital);
     
       }
+  
+  searchData(value) {
+        var url = 'http://emr-life.com/thkjr/taig/Api/query?hospital=55c4e3ed790f9b223e000002&hn='+value;
+        var response = this.http.get(url).map(res => res.json().data);
+        return response;
+  } 
+  
+  addCaseData(value){
+       var url = 'http://emr-life.com/thkjr/taig/Api/submit_case?update=result'
+  }
 
   
 }

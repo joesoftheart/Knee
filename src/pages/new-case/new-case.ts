@@ -8,7 +8,7 @@ import { LoadingController } from 'ionic-angular';
 import { FormBuilder , Validators, FormGroup ,AbstractControl ,ValidatorFn} from '@angular/forms';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
-
+import { Http ,Headers ,RequestOptions } from '@angular/http';
 
 
 /**
@@ -44,11 +44,11 @@ export class NewCasePage {
   hos : AbstractControl;
   name : AbstractControl;
   hn : AbstractControl;
-  sex : AbstractControl;
+  gender : AbstractControl;
   age : AbstractControl;
   casetype : AbstractControl;
   
-  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavController,private barcodeScanner: BarcodeScanner,public dataService: DataServiceProvider,public loadingCtrl: LoadingController,public formbuild:FormBuilder,private toast: Toast,private sqlite: SQLite) {
+  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavController,private barcodeScanner: BarcodeScanner,public dataService: DataServiceProvider,public loadingCtrl: LoadingController,public formbuild:FormBuilder,private toast: Toast,private sqlite: SQLite,public http: Http) {
     this.presentLoadingDefault()
     this.dataService.getListDetails()
     .subscribe((response)=> {
@@ -81,7 +81,7 @@ export class NewCasePage {
         hos:['',Validators.required],
         name : ['',Validators.required],
         hn :['',Validators.required],
-        sex:['' , Validators.required],
+        gender:['' , Validators.required],
         age:['',Validators.required],
         casetype:['',Validators.required]
        });
@@ -90,7 +90,7 @@ export class NewCasePage {
           this.hos = this.formCase.controls['hos'];
           this.name = this.formCase.controls['name'];
           this.hn = this.formCase.controls['hn'];
-          this.sex = this.formCase.controls['sex'];
+          this.gender = this.formCase.controls['gender'];
           this.age = this.formCase.controls['aage'];
           this.casetype = this.formCase.controls['casetype'];
   }
@@ -105,6 +105,20 @@ export class NewCasePage {
     console.log(this.formCase.value);
     console.log("SaveDataCase");
     this.saveData();
+    // var headers = new Headers();
+    // headers.append("Accept",'application/json');
+    // headers.append('Content-Type','application/json');
+    // let options = new RequestOptions({headers:headers});
+    
+    // var link = 'http://thkjr.emr-life.com/taig/Api/submit_case';
+    // var data =  {update: this.formCase.value};
+    
+    // this.http.post(link, data ,options)
+    // .subscribe(data_res => {
+    //    console.log(data_res)
+    // }, error => {
+    //     console.log("Oooops!");
+    // });
  }
 
  saveData() {
@@ -112,7 +126,7 @@ export class NewCasePage {
      name: 'ionicdb.db',
      location: 'default'
    }).then((db: SQLiteObject) => {
-     db.executeSql('INSERT INTO casetype VALUES(NULL,?,?,?,?,?,?,?)',[this.date.value,this.hos.value,this.name.value,this.hn.value,this.sex.value,this.age.value,this.casetype.value])
+     db.executeSql('INSERT INTO casetype VALUES(NULL,?,?,?,?,?,?,?)',[this.date.value,this.hos.value,this.name.value,this.hn.value,this.gender.value,this.age.value,this.casetype.value])
        .then(res => {
          console.log(res);
          this.toast.show('Data saved', '5000', 'center').subscribe(

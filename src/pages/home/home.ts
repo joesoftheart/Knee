@@ -13,11 +13,16 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 })
 export class HomePage {
   public platform: Platform; //Platform controller
- 
+  
+  // response  Hospital &&  HN
+  data_response:any = []; 
+  
   username: string;
   datacase: any = [];
   myDataArray = ['1', '2', '3','1', '2', '3','1', '2', '3','1', '2', '3','1', '2', '3','1', '2', '3'];
-
+   
+  mydate: String = new Date().toISOString();
+   
     public event = {
         month: '1990-02-19',
         timeStarts: '07:43',
@@ -107,7 +112,7 @@ getData() {
           db.executeSql('SELECT * FROM casetype ORDER BY caseid DESC', {}).then(res => {
           this.datacase = [];
             for(var i=0; i<res.rows.length; i++) {
-            this.datacase.push({caseid:res.rows.item(i).caseid,date:res.rows.item(i).date,hn:res.rows.item(i).hn,sex:res.rows.item(i).sex,age:res.rows.item(i).age,case:res.rows.item(i).case})
+            this.datacase.push({caseid:res.rows.item(i).caseid,date:res.rows.item(i).date,hn:res.rows.item(i).hn,gender:res.rows.item(i).gender,age:res.rows.item(i).age,case:res.rows.item(i).case})
             }
             this.toast.show('getCaseType', '5000', 'center').subscribe(
               toast => {
@@ -118,6 +123,25 @@ getData() {
   }).catch(e => console.log(e));
 }
 
+
+
+searchForMovie(event) {
+    
+  if(event.target.value != ""  ) {
+      this. dataService.searchData(event.target.value).subscribe(
+          data => {
+              this.data_response = data; 
+              console.log(this.data_response);
+          },
+          err => {
+              console.log(err);
+          },
+          () => console.log('Data Search Complete')
+      );
+  }else{
+    console.log(event.target.value);
+  }
+}  
 
 
 
